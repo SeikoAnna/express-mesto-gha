@@ -25,13 +25,13 @@ const getUserById = (req, res) => {
         res
           .status(ERROR_INACCURATE_DATA)
           .send({
-            message: 'Переданы некорректные данны при поиске пользователя по id',
+            message: 'Введены некорректные данные',
           });
       } else if (err.message === 'Not Found') {
         res
           .status(ERROR_NOT_FOUND)
           .send({
-            message: 'Пользователь по указанному id не найден',
+            message: 'Пользователь не найден',
           });
       } else {
         res
@@ -53,7 +53,7 @@ const createUser = (req, res) => {
         res
           .status(ERROR_INACCURATE_DATA)
           .send({
-            message: 'Переданы некорректные данные при создании пользователя',
+            message: 'Введены некорректные данные',
           });
       } else {
         res
@@ -78,9 +78,9 @@ const updateUser = (req, res) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные при обновлении профиля' });
+        res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные' });
       } else if (err.message === 'Not Found') {
-        res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь с указанным id не найден' });
+        res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь не найден' });
       } else {
         res.status(ERROR_INTERNAL_SERVER).send({ message: 'Внутренняя ошибка сервера' });
       }
@@ -98,9 +98,9 @@ const updateUserAvatar = (req, res) => {
     .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError' || err.name === 'CastError') {
-        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные при обновлении аватара' });
+        res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные' });
       } else if (err.message === 'Not Found') {
-        res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь с указанным id не найден' });
+        res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь не найден' });
       } else {
         res.status(ERROR_INTERNAL_SERVER).send({ message: 'Внутренняя ошибка сервера' });
       }

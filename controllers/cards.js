@@ -28,7 +28,7 @@ const createCard = (req, res) => {
         res
           .status(ERROR_INACCURATE_DATA)
           .send({
-            message: 'Переданы некорректные данные при создании карточки',
+            message: 'Введены некорректные данные',
           });
       } else {
         res
@@ -46,9 +46,9 @@ const deleteCard = (req, res) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные при удалении карточки' });
+        res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные при удалении карточки' });
       } else if (err.message === 'Not Found') {
-        res.status(ERROR_NOT_FOUND).send({ message: 'Карточка с указанным id не найдена' });
+        res.status(ERROR_NOT_FOUND).send({ message: 'Карточка не найдена' });
       } else {
         res.status(ERROR_INTERNAL_SERVER).send({ message: 'Внутренняя ошибка сервера' });
       }
@@ -65,9 +65,9 @@ const likeCard = (req, res) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные для добавления лайка' });
+        res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные' });
       } else if (err.message === 'Not Found') {
-        res.status(ERROR_NOT_FOUND).send({ message: 'Передан несуществующий _id карточки' });
+        res.status(ERROR_NOT_FOUND).send({ message: 'Такой карточки не существует' });
       } else {
         res.status(ERROR_INTERNAL_SERVER).send({ message: 'Внутренняя ошибка сервера' });
       }
@@ -84,9 +84,9 @@ const dislikeCard = (req, res) => {
     .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные для удаления лайка' });
+        res.status(ERROR_INACCURATE_DATA).send({ message: 'Переданы некорректные данные' });
       } else if (err.message === 'Not Found') {
-        res.status(ERROR_NOT_FOUND).send({ message: 'Передан несуществующий _id карточки' });
+        res.status(ERROR_NOT_FOUND).send({ message: 'Такой карточки не существует' });
       } else {
         res.status(ERROR_INTERNAL_SERVER).send({ message: 'Внутренняя ошибка сервера' });
       }

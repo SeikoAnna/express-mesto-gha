@@ -2,7 +2,7 @@
   "name": "express-mesto-gha",
   "version": "1.0.0",
   "description": "[![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)\r # Проект Mesto фронтенд + бэкенд",
-  "main": ".eslintrc.js",
+  "main": "app.js",
   "dependencies": {
     "express": "^4.18.2",
     "helmet": "^7.0.0",
@@ -10,13 +10,12 @@
     "validator": "^13.9.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint .",
     "dev": "nodemon app.js",
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anna Seiko",
   "license": "ISC",
   "devDependencies": {
     "eslint-config-airbnb-base": "^15.0.0",
