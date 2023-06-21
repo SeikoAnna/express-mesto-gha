@@ -1,6 +1,7 @@
 const User = require('../models/user');
 
 const {
+  STATUS_CREATED,
   ERROR_INACCURATE_DATA,
   ERROR_NOT_FOUND,
   ERROR_INTERNAL_SERVER,
@@ -47,7 +48,7 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
   User.create(req.body)
-    .then((user) => res.status(201).send(user))
+    .then((user) => res.status(STATUS_CREATED).send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res
@@ -77,7 +78,7 @@ const updateUser = (req, res) => {
     .orFail(() => new Error('Not Found'))
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные' });
       } else if (err.message === 'Not Found') {
         res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь не найден' });
@@ -97,7 +98,7 @@ const updateUserAvatar = (req, res) => {
     .orFail(() => new Error('Not Found'))
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError' || err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         res.status(ERROR_INACCURATE_DATA).send({ message: 'Введены некорректные данные' });
       } else if (err.message === 'Not Found') {
         res.status(ERROR_NOT_FOUND).send({ message: 'Пользователь не найден' });

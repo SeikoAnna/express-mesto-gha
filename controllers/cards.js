@@ -1,6 +1,8 @@
 const Card = require('../models/card');
 
 const {
+  STATUS_OK,
+  STATUS_CREATED,
   ERROR_INACCURATE_DATA,
   ERROR_NOT_FOUND,
   ERROR_INTERNAL_SERVER,
@@ -8,7 +10,7 @@ const {
 
 const getCards = (req, res) => {
   Card.find({})
-    .then((card) => res.status(200).send(card))
+    .then((card) => res.status(STATUS_OK).send(card))
     .catch((err) => res
       .status(ERROR_INTERNAL_SERVER)
       .send({
@@ -22,7 +24,7 @@ const createCard = (req, res) => {
   Card.create({
     ...req.body,
     owner: req.user._id,
-  }).then((card) => res.status(201).send(card))
+  }).then((card) => res.status(STATUS_CREATED).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res
