@@ -10,7 +10,7 @@ const Unauthorized = require('../errors/Unauthorized');
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users))
-    .catch(next)
+    .catch(next);
 };
 
 const getUserById = (req, res, next) => {
@@ -93,7 +93,7 @@ const login = (req, res, next) => {
     .select('+password')
     .orFail(new Unauthorized('Неверный логин или пароль'))
     .then((user) => {
-      bcrypt.compare(String(password), user.password)
+      bcrypt.compare(password, user.password)
         .then((isValidUser) => {
           if (isValidUser) {
             const jwt = jsonWebToken.sign({
@@ -104,7 +104,14 @@ const login = (req, res, next) => {
               httpOnly: true,
               sameSite: true,
             });
-            res.send(user);
+            const userResponse = {
+              _id: user._id,
+              name: user.name,
+              about: user.about,
+              avatar: user.avatar,
+              email: user.email,
+            };
+            res.send(userResponse);
           } else {
             throw new Unauthorized('Неверный логин или пароль');
           }
